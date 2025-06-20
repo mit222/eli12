@@ -67,6 +67,9 @@ async function handleSubmit(e) {
     try {
         // Bild in Base64 konvertieren
         const base64Image = await fileToBase64(file);
+
+        //WICHTIG: Nur den Base64-Teil ohne Data-URL Prefix
+        const base64Only = base64Image.split(',')[1];
         
         // Status aktualisieren
         updateStatus('Text wird extrahiert...');
@@ -76,9 +79,10 @@ async function handleSubmit(e) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json'
             },
             body: JSON.stringify({
-                image: base64Image.split(',')[1], // Nur Base64-Teil ohne Data-URL
+                image: base64Only, // Nur Base64-Teil ohne Data-URL
                 timestamp: new Date().toISOString(),
                 filename: file.name
             })
