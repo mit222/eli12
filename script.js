@@ -131,24 +131,8 @@ function showResult(data) {
     elements.status.classList.add('hidden');
     elements.result.classList.remove('hidden');
     
-    // Base64 dekodieren wenn encoded
-    if (data.summary_encoded && data.summary_base64) {
-        try {
-            // Fix für UTF-8 Umlaute
-            const decodedSummary = decodeURIComponent(
-                atob(data.summary_base64)
-                    .split('')
-                    .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-                    .join('')
-            );
-    
-            elements.summaryContent.style.whiteSpace = 'pre-wrap';
-            elements.summaryContent.textContent = decodedSummary;
-        } catch (e) {
-            console.error('Fehler beim Dekodieren:', e);
-            elements.summaryContent.textContent = 'Fehler beim Dekodieren der Zusammenfassung';
-        }
-    } else if (data.summary) {
+    if (data.summary) {
+        // Zeilenumbrüche beibehalten
         elements.summaryContent.style.whiteSpace = 'pre-wrap';
         elements.summaryContent.textContent = data.summary;
     } else {
