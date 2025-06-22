@@ -96,8 +96,8 @@ async function handleSubmit(e) {
         
         const data = await response.json();
         
-        // Ergebnis anzeigen
-        showResult(data.summary);
+        // Ergebnis anzeigen - ganes Data Objekt übergeben
+        showResult(data);
         
     } catch (error) {
         console.error('Fehler:', error);
@@ -127,10 +127,25 @@ function updateStatus(message) {
     elements.statusText.textContent = message;
 }
 
-function showResult(summary) {
+function showResult(data) {
     elements.status.classList.add('hidden');
     elements.result.classList.remove('hidden');
-    elements.summaryContent.textContent = summary;
+    
+    // Base64 dekodieren wenn encoded
+    if (data.summary_encoded && data.summary_base64) {
+        try {
+            const decodedSummary = atob(data.summary_base64);
+            elements.summaryContent.style.whiteSpace = 'pre-wrap';
+            elements.summaryContent.textContent = decodedSummary;
+        } catch (e) {
+            console.error('Fehler beim Dekodieren:', e);
+            elements.summaryContent.textContent = 'Fehler beim Dekodieren der Zusammenfassung';
+        }
+    } else if (data.summary) {
+        elements.summaryContent.textContent = data.summary;
+    } else {
+        elements.summaryContent.textContent = 'Keine Zusammenfassung erhalten';
+    }
 }
 
 function showError(message) {
