@@ -134,7 +134,14 @@ function showResult(data) {
     // Base64 dekodieren wenn encoded
     if (data.summary_encoded && data.summary_base64) {
         try {
-            const decodedSummary = atob(data.summary_base64);
+            // Moderne UTF-8 kompatible Dekodierung
+            const binaryString = atob(data.summary_base64);
+            const bytes = new Uint8Array(binaryString.length);
+            for (let i = 0; i < binaryString.length; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            const decodedSummary = new TextDecoder('utf-8').decode(bytes);
+    
             elements.summaryContent.style.whiteSpace = 'pre-wrap';
             elements.summaryContent.textContent = decodedSummary;
         } catch (e) {
