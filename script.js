@@ -134,13 +134,13 @@ function showResult(data) {
     // Base64 dekodieren wenn encoded
     if (data.summary_encoded && data.summary_base64) {
         try {
-            // Moderne UTF-8 kompatible Dekodierung
-            const binaryString = atob(data.summary_base64);
-            const bytes = new Uint8Array(binaryString.length);
-            for (let i = 0; i < binaryString.length; i++) {
-                bytes[i] = binaryString.charCodeAt(i);
-            }
-            const decodedSummary = new TextDecoder('utf-8').decode(bytes);
+            // Fix für UTF-8 Umlaute
+            const decodedSummary = decodeURIComponent(
+                atob(data.summary_base64)
+                    .split('')
+                    .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+                    .join('')
+            );
     
             elements.summaryContent.style.whiteSpace = 'pre-wrap';
             elements.summaryContent.textContent = decodedSummary;
@@ -149,6 +149,7 @@ function showResult(data) {
             elements.summaryContent.textContent = 'Fehler beim Dekodieren der Zusammenfassung';
         }
     } else if (data.summary) {
+        elements.summaryContent.style.whiteSpace = 'pre-wrap';
         elements.summaryContent.textContent = data.summary;
     } else {
         elements.summaryContent.textContent = 'Keine Zusammenfassung erhalten';
