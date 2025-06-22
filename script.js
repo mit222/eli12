@@ -98,6 +98,7 @@ async function handleSubmit(e) {
         
         // Ergebnis anzeigen - ganes Data Objekt übergeben
         showResult(data);
+        console.log('Empfangene Daten:', data);
         
     } catch (error) {
         console.error('Fehler:', error);
