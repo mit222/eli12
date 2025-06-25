@@ -1,20 +1,3 @@
-/* CSS Variablen für dein Farbschema */
-:root {
-    --primary: #008084;      /* Türkis - Hauptfarbe */
-    --secondary: #003643;    /* Dunkles Blaugrün - für Text und Kontraste */
-    --accent: #f17b00;       /* Orange - für CTAs und Highlights */
-    --background: #f5f9f9;   /* Sehr helles Türkis-Grau */
-    --card-bg: #ffffff;
-    --text-dark: #003643;
-    --text-light: #5a6c73;
-    --border-light: rgba(0, 128, 132, 0.1);
-    --shadow-primary: rgba(0, 128, 132, 0.15);
-    --shadow-accent: rgba(241, 123, 0, 0.2);
-    --success: #00a896;
-    --error: #ff6b6b;
-}
-
-/* Globale Styles */
 * {
     margin: 0;
     padding: 0;
@@ -22,11 +5,246 @@
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
-    color: var(--text-dark);
-    background-color: var(--background);
-    background-image: 
-        radial-gradient(circle at 20% 80%, rgba(0, 128, 132, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(241, 123, 0, 0.05) 0%, transparent 50%);
+    color: #003643; /* Secondary - dunkles Blaugrün für Text */
+    background-color: #f5f9f9; /* Leicht getöntes Grau mit Türkis-Touch */
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px 0;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #008084; /* Primary - Türkis */
+}
+
+header p {
+    font-size: 1.1em;
+    color: #5a6c73; /* Etwas helleres Grau-Blau */
+}
+
+main {
+    flex: 1;
+}
+
+.upload-section {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 128, 132, 0.1); /* Schatten mit Primary-Farbe */
+    margin-bottom: 30px;
+}
+
+.file-input-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+#imageInput {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.file-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    border: 3px dashed #008084; /* Primary - Türkis */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #f8fafa; /* Sehr helles Türkis-Grau */
+}
+
+.file-label:hover {
+    background: #e8f5f5; /* Helleres Türkis beim Hover */
+    border-color: #f17b00; /* Accent - Orange beim Hover */
+}
+
+.file-icon {
+    font-size: 3em;
+    margin-right: 15px;
+}
+
+.file-text {
+    font-size: 1.2em;
+    color: #003643; /* Secondary - dunkles Blaugrün */
+}
+
+.preview {
+    margin: 20px 0;
+    position: relative;
+    display: inline-block;
+}
+
+.preview img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 54, 67, 0.1); /* Schatten mit Secondary-Farbe */
+}
+
+.remove-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #e74c3c; /* Rot für Löschen bleibt */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: #f17b00; /* Accent - Orange für Hauptaktion */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background: #d96e00; /* Dunkleres Orange beim Hover */
+}
+
+.submit-btn:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.status-section {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 128, 132, 0.1);
+    text-align: center;
+}
+
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #008084; /* Primary - Türkis */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.result-section {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 128, 132, 0.1);
+}
+
+.result-section h2 {
+    margin-bottom: 20px;
+    color: #008084; /* Primary - Türkis */
+}
+
+.summary-content {
+    background: #f8fafa; /* Sehr helles Türkis-Grau */
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    white-space: pre-wrap;
+    line-height: 1.8;
+    border-left: 4px solid #f17b00; /* Accent - Orange als Highlight */
+}
+
+.new-analysis-btn {
+    padding: 12px 24px;
+    background: #008084; /* Primary - Türkis */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.new-analysis-btn:hover {
+    background: #006a6d; /* Dunkleres Türkis beim Hover */
+}
+
+.error-section {
+    background: #fee;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #e74c3c;
+    margin-bottom: 20px;
+}
+
+.error-section p {
+    color: #c0392b;
+    margin-bottom: 15px;
+}
+
+.retry-btn {
+    padding: 10px 20px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    color: #5a6c73; /* Helleres Grau-Blau */
+    font-size: 0.9em;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+    
+    header h1 {
+        font-size: 2em;
+    }
+    
+    .upload-section,
+    .status-section,
+    .result-section {
+        padding: 20px;
+    }
 }
