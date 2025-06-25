@@ -20,6 +20,13 @@ body {
     flex-direction: column;
 }
 
+.description {
+    font-size: 1.1em;
+    color: #5a6c73; /* Etwas helleres Grau-Blau */
+    margin-bottom: 20px;
+    text-align:left;
+}
+
 header {
     text-align: center;
     margin-bottom: 40px;
